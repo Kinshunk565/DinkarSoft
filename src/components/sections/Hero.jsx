@@ -83,7 +83,7 @@ const Hero = () => {
                                     type="submit"
                                     className="bg-brand-navy hover:bg-slate-800 text-white px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2 shadow-lg shadow-navy-900/20 whitespace-nowrap"
                                 >
-                                    Create Bot <ArrowRight size={16} />
+                                    Book a Demo <ArrowRight size={16} />
                                 </button>
                             </div>
                         </form>
