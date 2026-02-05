@@ -30,12 +30,12 @@ const PopupManager = () => {
                 actionLabel="Explore Now"
                 onAction={closePopup}
             >
-                <p className="mb-4">
+                <p className="mb-4 text-slate-300">
                     Experience the next generation of digital solutions with DinkarSoft.
                     We've redesigned our experience to be faster, bolder, and more intuitive.
                 </p>
                 <div className="p-4 bg-white/5 rounded-lg border border-white/10">
-                    <span className="text-neon-violet font-bold">New:</span> Check out our interactive portfolio.
+                    <span className="text-brand-teal font-bold">New:</span> Check out our interactive portfolio.
                 </div>
             </Modal>
 
@@ -50,35 +50,62 @@ const PopupManager = () => {
                     {activePopup === 'newsletter' ? (
                         <motion.div
                             key="expanded"
-                            initial={{ scale: 0.8, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.8, opacity: 0 }}
-                            className="bg-surface-charcoal border border-neon-pink/30 p-6 rounded-2xl shadow-glow w-80"
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            className="bg-brand-navy text-white border border-brand-teal/30 p-0 rounded-2xl shadow-2xl w-[340px] overflow-hidden relative"
                         >
-                            <div className="flex justify-between items-start mb-4">
-                                <h4 className="font-bold text-lg">Join the Inner Circle</h4>
-                                <button onClick={() => setActivePopup(null)} className="text-gray-400 hover:text-white"><X size={18} /></button>
-                            </div>
-                            <p className="text-sm text-gray-400 mb-4">Get exclusive design insights and tech trends delivered to your inbox.</p>
-                            <div className="flex gap-2">
-                                <input type="email" placeholder="Email address" className="bg-black/50 border border-white/10 rounded px-3 py-2 text-sm w-full focus:border-neon-pink outline-none" />
-                                <button className="bg-neon-pink p-2 rounded hover:bg-neon-pink/80"><ArrowRight size={18} /></button>
+                            {/* Decorative Top Gradient */}
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-teal to-blue-500" />
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-brand-teal/20 blur-[50px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+
+                            <div className="p-6 relative z-10">
+                                <div className="flex justify-between items-start mb-2">
+                                    <div className="inline-block px-3 py-1 rounded-full bg-brand-teal/20 text-brand-teal-light text-xs font-bold tracking-wide mb-2 border border-brand-teal/20">
+                                        EXCLUSIVE
+                                    </div>
+                                    <button
+                                        onClick={() => setActivePopup(null)}
+                                        className="text-slate-400 hover:text-white transition-colors bg-white/5 p-1.5 rounded-full hover:bg-white/10"
+                                    >
+                                        <X size={16} />
+                                    </button>
+                                </div>
+
+                                <h4 className="font-display font-bold text-xl mb-2">Join the Inner Circle</h4>
+                                <p className="text-sm text-slate-300 mb-6 leading-relaxed">
+                                    Get exclusive design insights and top-tier tech trends delivered directly to your inbox.
+                                </p>
+
+                                <div className="flex flex-col gap-3">
+                                    <input
+                                        type="email"
+                                        placeholder="Enter your email"
+                                        className="bg-white/10 border border-white/10 rounded-lg px-4 py-3 text-sm w-full focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none placeholder:text-slate-500 text-white transition-all"
+                                    />
+                                    <button className="bg-brand-teal text-white font-medium py-3 rounded-lg hover:bg-teal-600 transition-colors shadow-lg shadow-teal-900/20 flex items-center justify-center gap-2">
+                                        Subscribe Now <ArrowRight size={16} />
+                                    </button>
+                                </div>
                             </div>
                         </motion.div>
                     ) : (
                         <motion.button
                             key="badge"
                             onClick={() => setActivePopup('newsletter')}
-                            whileHover={{ scale: 1.05 }}
+                            whileHover={{ scale: 1.05, y: -2 }}
                             whileTap={{ scale: 0.95 }}
-                            className="bg-surface-charcoal border border-white/10 p-4 rounded-full shadow-lg flex items-center gap-3 group"
+                            className="bg-brand-navy border border-brand-teal/30 p-3 pr-6 rounded-full shadow-2xl shadow-teal-900/20 flex items-center gap-4 group hover:border-brand-teal transition-colors"
                         >
-                            <div className="bg-neon-pink/20 p-2 rounded-full text-neon-pink group-hover:bg-neon-pink group-hover:text-white transition-colors">
-                                <Mail size={20} />
+                            <div className="relative">
+                                <div className="absolute inset-0 bg-brand-teal blur-md opacity-20 group-hover:opacity-40 transition-opacity" />
+                                <div className="bg-gradient-to-br from-brand-teal to-teal-800 p-3 rounded-full text-white relative z-10">
+                                    <Mail size={20} />
+                                </div>
                             </div>
-                            <div className="text-left pr-2">
-                                <div className="text-xs text-gray-400 font-medium">New Updates</div>
-                                <div className="text-sm font-bold">Subscribe</div>
+                            <div className="text-left">
+                                <div className="text-[10px] text-brand-teal-light font-bold uppercase tracking-wider">Stay Updated</div>
+                                <div className="text-sm font-bold text-white group-hover:text-brand-teal-light transition-colors">Join Newsletter</div>
                             </div>
                         </motion.button>
                     )}

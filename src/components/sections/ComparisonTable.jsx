@@ -20,86 +20,105 @@ const ComparisonTable = () => {
             name: "Accuracy",
             dinkar: "High (Strict Scope)",
             generic: "Hallucinates",
-            human: "High"
+            human: "Variable"
         },
         {
             name: "Source Transparency",
             dinkar: "Source Linking",
-            generic: "Text Only",
+            generic: "Black Box",
             human: "N/A"
         },
         {
             name: "Cost",
-            dinkar: "Fixed / Predictable",
+            dinkar: "Fixed Flat Rate",
             generic: "High Token Costs",
-            human: "Very High"
+            human: "Extremely High"
         }
     ];
 
     return (
-        <section className="py-24 px-6 md:px-12 relative z-10 bg-surface-charcoal/50">
-            <div className="max-w-6xl mx-auto">
+        <section className="py-24 px-6 md:px-12 bg-surface-alt relative overflow-hidden">
+            <div className="max-w-7xl mx-auto relative z-10">
                 <motion.div
                     className="text-center mb-16"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-                        Why We <span className="text-neon-cyan">Win</span>
+                    <div className="inline-block px-4 py-1.5 mb-4 rounded-full bg-brand-teal/10 text-brand-teal text-sm font-semibold tracking-wide">
+                        COMPARE
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-display font-bold text-brand-navy mb-4">
+                        Why Choose DinkarSoft?
                     </h2>
-                    <p className="text-gray-400 max-w-2xl mx-auto">
-                        See how DinkarSoft AI stacks up against the competition.
+                    <p className="text-text-body max-w-2xl mx-auto">
+                        See how our specialized AI solution outperforms generic models and traditional staffing.
                     </p>
                 </motion.div>
 
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="overflow-x-auto"
+                    className="overflow-x-auto pb-8 -mx-4 px-4 scrollbar-hide"
                 >
-                    <div className="min-w-[800px] bg-surface-charcoal rounded-2xl border border-white/5 overflow-hidden">
+                    <div className="min-w-[900px] bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
                         {/* Header */}
-                        <div className="grid grid-cols-4 bg-white/5 border-b border-white/5">
-                            <div className="p-6 font-display font-bold text-gray-400">Feature</div>
-                            <div className="p-6 font-display font-bold text-neon-cyan bg-neon-cyan/5 border-x border-neon-cyan/20 relative">
+                        <div className="grid grid-cols-4 border-b border-slate-100 bg-slate-50/50 text-sm tracking-wide uppercase text-slate-500 font-semibold">
+                            <div className="p-6">Feature</div>
+                            <div className="p-6 text-brand-teal bg-brand-teal/5 border-x border-brand-teal/10 relative">
                                 DinkarSoft AI
-                                <div className="absolute top-0 left-0 w-full h-1 bg-neon-cyan shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
+                                <div className="absolute top-0 left-0 w-full h-1 bg-brand-teal" />
                             </div>
-                            <div className="p-6 font-display font-bold text-gray-400">Generic Chatbots</div>
-                            <div className="p-6 font-display font-bold text-gray-400">Human Support</div>
+                            <div className="p-6">Generic Chatbots</div>
+                            <div className="p-6">Human Support</div>
                         </div>
 
                         {/* Rows */}
                         {features.map((row, index) => (
                             <div
                                 key={index}
-                                className={`grid grid-cols-4 border-b border-white/5 hover:bg-white/2 transition-colors ${index === features.length - 1 ? 'border-b-0' : ''
-                                    }`}
+                                className={`grid grid-cols-4 border-b border-slate-100 hover:bg-slate-50/30 transition-colors last:border-0`}
                             >
-                                <div className="p-6 flex items-center text-gray-300 font-medium">
+                                {/* Feature Name */}
+                                <div className="p-6 flex items-center text-brand-navy font-medium">
                                     {row.name}
                                 </div>
-                                <div className="p-6 flex items-center text-white font-bold bg-neon-cyan/5 border-x border-neon-cyan/20">
-                                    <Check className="w-5 h-5 text-neon-cyan mr-2 flex-shrink-0" />
+
+                                {/* DinkarSoft Column */}
+                                <div className="p-6 flex items-center text-brand-navy font-bold bg-brand-teal/5 border-x border-brand-teal/10 shadow-[inset_0_0_20px_rgba(15,118,110,0.02)]">
+                                    <div className="w-6 h-6 rounded-full bg-teal-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                        <Check className="w-3.5 h-3.5 text-brand-teal" />
+                                    </div>
                                     {row.dinkar}
                                 </div>
-                                <div className="p-6 flex items-center text-gray-400">
-                                    {row.generic === "Hallucinates" || row.generic === "Public Training" || row.generic === "High Token Costs" ? (
-                                        <X className="w-5 h-5 text-red-400 mr-2 flex-shrink-0" />
+
+                                {/* Generic Column */}
+                                <div className="p-6 flex items-center text-text-body">
+                                    {row.generic === "Hallucinates" || row.generic === "Public Training" || row.generic === "High Token Costs" || row.generic === "Black Box" ? (
+                                        <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                            <X className="w-3.5 h-3.5 text-red-600" />
+                                        </div>
                                     ) : (
-                                        <Minus className="w-5 h-5 text-gray-600 mr-2 flex-shrink-0" />
+                                        <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                            <Minus className="w-3.5 h-3.5 text-slate-500" />
+                                        </div>
                                     )}
                                     {row.generic}
                                 </div>
-                                <div className="p-6 flex items-center text-gray-400">
-                                    {row.human === "Weeks of Hiring" || row.human === "Very High" ? (
-                                        <X className="w-5 h-5 text-red-400 mr-2 flex-shrink-0" />
+
+                                {/* Human Column */}
+                                <div className="p-6 flex items-center text-text-body">
+                                    {row.human === "Weeks of Hiring" || row.human === "Very High" || row.human === "Variable" || row.human === "Extremely High" ? (
+                                        <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                            <X className="w-3.5 h-3.5 text-red-600" />
+                                        </div>
                                     ) : row.human === "N/A" ? (
-                                        <span className="text-gray-600">N/A</span>
+                                        <span className="text-slate-400 pl-2">N/A</span>
                                     ) : (
-                                        <Check className="w-5 h-5 text-green-400 mr-2 flex-shrink-0" />
+                                        <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                            <Check className="w-3.5 h-3.5 text-slate-500" />
+                                        </div>
                                     )}
                                     {row.human !== "N/A" && row.human}
                                 </div>
