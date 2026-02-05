@@ -4,7 +4,14 @@ import { X, Loader, CheckCircle, Bot, Send, Globe, Brain, Zap } from 'lucide-rea
 
 const DemoModal = ({ isOpen, onClose, url }) => {
     const [step, setStep] = useState('form'); // form, processing, ready
-    const [formData, setFormData] = useState({ name: '', email: '', company: '' });
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        website: url || '',
+        company: '',
+        address: ''
+    });
     const [progress, setProgress] = useState(0);
     const [logs, setLogs] = useState([]);
     const [messages, setMessages] = useState([]);
@@ -18,9 +25,19 @@ const DemoModal = ({ isOpen, onClose, url }) => {
             setProgress(0);
             setLogs([]);
             setMessages([]);
-            setFormData({ name: '', email: '', company: '' });
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                website: url || '',
+                company: '',
+                address: ''
+            });
+        } else {
+            // Update website if url prop changes while open (unlikely but good practice)
+            setFormData(prev => ({ ...prev, website: url || prev.website }));
         }
-    }, [isOpen]);
+    }, [isOpen, url]);
 
     // Processing Logic
     useEffect(() => {
@@ -119,36 +136,76 @@ const DemoModal = ({ isOpen, onClose, url }) => {
                                     <p className="text-slate-500 mb-8 text-center text-sm">We'll train a custom AI agent on {url || 'your website'} in seconds.</p>
 
                                     <form onSubmit={handleFormSubmit} className="space-y-4">
-                                        <div>
-                                            <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">Full Name</label>
-                                            <input
-                                                type="text"
-                                                required
-                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 outline-none focus:border-brand-teal transition-colors text-sm"
-                                                placeholder="John Doe"
-                                                value={formData.name}
-                                                onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                            />
+                                        <div className="grid md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">Full Name</label>
+                                                <input
+                                                    type="text"
+                                                    required
+                                                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 outline-none focus:border-brand-teal transition-colors text-sm"
+                                                    placeholder="John Doe"
+                                                    value={formData.name}
+                                                    onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">Work Email</label>
+                                                <input
+                                                    type="email"
+                                                    required
+                                                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 outline-none focus:border-brand-teal transition-colors text-sm"
+                                                    placeholder="john@company.com"
+                                                    value={formData.email}
+                                                    onChange={e => setFormData({ ...formData, email: e.target.value })}
+                                                />
+                                            </div>
                                         </div>
-                                        <div>
-                                            <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">Work Email</label>
-                                            <input
-                                                type="email"
-                                                required
-                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 outline-none focus:border-brand-teal transition-colors text-sm"
-                                                placeholder="john@company.com"
-                                                value={formData.email}
-                                                onChange={e => setFormData({ ...formData, email: e.target.value })}
-                                            />
+
+                                        <div className="grid md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">Phone Number</label>
+                                                <input
+                                                    type="tel"
+                                                    required
+                                                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 outline-none focus:border-brand-teal transition-colors text-sm"
+                                                    placeholder="+1 (555) 000-0000"
+                                                    value={formData.phone}
+                                                    onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">Website URL</label>
+                                                <input
+                                                    type="url"
+                                                    required
+                                                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 outline-none focus:border-brand-teal transition-colors text-sm"
+                                                    placeholder="https://example.com"
+                                                    value={formData.website}
+                                                    onChange={e => setFormData({ ...formData, website: e.target.value })}
+                                                />
+                                            </div>
                                         </div>
+
                                         <div>
                                             <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">Company Name</label>
                                             <input
                                                 type="text"
+                                                required
                                                 className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 outline-none focus:border-brand-teal transition-colors text-sm"
                                                 placeholder="Acme Inc."
                                                 value={formData.company}
                                                 onChange={e => setFormData({ ...formData, company: e.target.value })}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">Company Address <span className="text-slate-400 font-normal lowercase ml-1">(Optional)</span></label>
+                                            <input
+                                                type="text"
+                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 outline-none focus:border-brand-teal transition-colors text-sm"
+                                                placeholder="123 Business St, City, Country"
+                                                value={formData.address}
+                                                onChange={e => setFormData({ ...formData, address: e.target.value })}
                                             />
                                         </div>
 
