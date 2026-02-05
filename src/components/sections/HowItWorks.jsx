@@ -4,20 +4,23 @@ import { Radar, Filter, Rocket } from 'lucide-react';
 
 const StepCard = ({ icon: Icon, step, title, description, delay }) => (
     <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay, duration: 0.5 }}
-        className="relative flex flex-col items-center text-center p-6"
+        className="relative flex flex-col items-center text-center p-8 rounded-2xl bg-white border border-slate-100 shadow-xl shadow-slate-200/50 hover:-translate-y-1 transition-transform duration-300"
     >
-        <div className="w-16 h-16 bg-surface-charcoal rounded-2xl border border-white/10 flex items-center justify-center mb-6 shadow-glow transition-all hover:scale-110 hover:border-neon-cyan/50 z-10">
-            <Icon className="text-neon-cyan w-8 h-8" />
+        {/* Step Badge */}
+        <div className="absolute -top-4 bg-brand-navy text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
+            {step}
         </div>
-        <div className="absolute top-14 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-neon-cyan/50 to-transparent -z-0 md:hidden"></div>
 
-        <h3 className="text-neon-pink font-mono text-sm mb-2">{step}</h3>
-        <h4 className="text-xl font-display font-bold mb-3 text-white">{title}</h4>
-        <p className="text-gray-400 leading-relaxed text-sm max-w-xs">
+        <div className="w-16 h-16 bg-gradient-to-br from-brand-teal to-teal-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-teal-900/20 text-white z-10 group">
+            <Icon className="w-8 h-8 group-hover:scale-110 transition-transform duration-300" />
+        </div>
+
+        <h4 className="text-xl font-display font-bold mb-3 text-brand-navy">{title}</h4>
+        <p className="text-text-body leading-relaxed text-sm">
             {description}
         </p>
     </motion.div>
@@ -28,25 +31,28 @@ const HowItWorks = () => {
         {
             icon: Radar,
             step: "STEP 1",
-            title: "Scan",
+            title: "Smart Scan",
             description: "We crawl your sitemap and identifying key product pages, skipping the fluff."
         },
         {
             icon: Filter,
             step: "STEP 2",
-            title: "Curate",
+            title: "Curate Knowledge",
             description: "You choose what your bot learns. Deselect outdated blogs or irrelevant pages with one click."
         },
         {
             icon: Rocket,
             step: "STEP 3",
-            title: "Deploy",
+            title: "Instant Deploy",
             description: "Get a copy-paste snippet. Your bot is live and answers questions using your verified data."
         }
     ];
 
     return (
-        <section className="py-24 px-6 md:px-12 relative z-10 bg-vanta-black/50 backdrop-blur-sm">
+        <section className="py-24 px-6 md:px-12 relative z-10 bg-surface-alt overflow-hidden">
+            {/* Background Decor */}
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     className="text-center mb-16"
@@ -54,17 +60,20 @@ const HowItWorks = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-                        How It <span className="text-neon-cyan">Works</span>
+                    <div className="inline-block px-4 py-1.5 mb-4 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold tracking-wide border border-blue-100">
+                        PROCESS
+                    </div>
+                    <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 text-brand-navy">
+                        How It <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-blue-600">Works</span>
                     </h2>
-                    <p className="text-gray-400 max-w-2xl mx-auto">
-                        Three simple steps to automate your customer support.
+                    <p className="text-text-body max-w-2xl mx-auto text-lg">
+                        Three simple steps to automate your customer support without the technical headaches.
                     </p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-3 gap-12 relative">
-                    {/* Connecting Line for Desktop */}
-                    <div className="hidden md:block absolute top-[2.5rem] left-[16%] right-[16%] h-px bg-gradient-to-r from-transparent via-neon-cyan/30 to-transparent border-t border-dashed border-white/10"></div>
+                <div className="grid md:grid-cols-3 gap-8 relative">
+                    {/* Connecting Line (Desktop) */}
+                    <div className="hidden md:block absolute top-[50%] left-0 w-full h-1 bg-gradient-to-r from-slate-200 via-slate-200 to-slate-200 -z-10 -translate-y-1/2 rounded-full opacity-50"></div>
 
                     {steps.map((step, index) => (
                         <StepCard

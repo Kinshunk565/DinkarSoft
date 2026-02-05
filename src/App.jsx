@@ -10,7 +10,7 @@ import Footer from './components/layout/Footer';
 
 function App() {
   return (
-    <div className="relative min-h-screen bg-vanta-black text-white font-body selection:bg-neon-pink selection:text-white overflow-x-hidden">
+    <div className="relative min-h-screen bg-surface-white text-text-body font-body selection:bg-brand-teal selection:text-white overflow-x-hidden">
       <CustomCursor />
       <Navbar />
       <PopupManager />

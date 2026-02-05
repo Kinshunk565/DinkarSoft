@@ -1,28 +1,40 @@
 @import "tailwindcss";
 
 @theme {
-  --color-neon-violet: #7C3AED;
-  --color-neon-pink: #DB2777;
-  --color-cyber-cyan: #22D3EE;
-  --color-neon-cyan: #22D3EE;
-  --color-vanta-black: #050505;
-  --color-surface-charcoal: #121212;
+  --color-brand-navy: #0F172A;
+  /* Slate-900 */
+  --color-brand-teal: #0F766E;
+  /* Teal-700 */
+  --color-brand-teal-light: #F0FDFA;
+  /* Teal-50 */
 
-  --font-display: "Space Grotesk", sans-serif;
+  --color-surface-white: #FFFFFF;
+  --color-surface-alt: #F8FAFC;
+  /* Slate-50 */
+
+  --color-text-main: #0F172A;
+  /* Slate-900 */
+  --color-text-body: #475569;
+  /* Slate-600 */
+  --color-text-muted: #94A3B8;
+  /* Slate-400 */
+
+  --font-display: "Inter", sans-serif;
+  /* Unified font for professional look */
   --font-body: "Inter", sans-serif;
 
-  --shadow-glow: 0 0 20px rgba(124, 58, 237, 0.5);
-  --shadow-glow-cyan: 0 0 20px rgba(34, 211, 238, 0.5);
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-card-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 :root {
   font-family: var(--font-body);
-  line-height: 1.5;
+  line-height: 1.6;
   font-weight: 400;
 
-  color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: var(--color-vanta-black);
+  color-scheme: light;
+  color: var(--color-text-body);
+  background-color: var(--color-surface-white);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -33,32 +45,15 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: var(--color-vanta-black);
+  background-color: var(--color-surface-white);
   overflow-x: hidden;
-  cursor: none;
-  /* Hide default cursor for custom cursor */
+  /* Restored default cursor for professionalism */
 }
 
-/* Custom Cursor Styles */
-.custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 12px;
-  height: 12px;
-  border: 2px solid var(--color-cyber-cyan);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: difference;
-  transition: width 0.3s, height 0.3s, background-color 0.3s;
-}
-
-.custom-cursor.hovered {
-  width: 40px;
-  height: 40px;
-  background-color: rgba(34, 211, 238, 0.2);
-  border-color: transparent;
-  backdrop-filter: blur(2px);
+/* Utilities */
+.text-gradient-brand {
+  background: linear-gradient(135deg, var(--color-brand-navy) 0%, var(--color-brand-teal) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

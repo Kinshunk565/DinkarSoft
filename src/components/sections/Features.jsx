@@ -8,13 +8,16 @@ const FeatureCard = ({ icon: Icon, title, description, delay }) => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay, duration: 0.5 }}
-        className="bg-surface-charcoal p-8 rounded-2xl border border-white/5 hover:border-neon-violet/50 hover:shadow-glow transition-all group h-full"
+        className="group bg-white p-8 rounded-2xl border border-slate-100 shadow-lg shadow-slate-200/50 hover:shadow-2xl hover:shadow-teal-900/10 transition-all duration-300 relative overflow-hidden"
     >
-        <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-neon-violet/20 transition-colors">
-            <Icon className="text-neon-violet w-6 h-6 group-hover:text-white" />
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-teal to-blue-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+
+        <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-teal group-hover:text-white transition-colors duration-300 text-brand-teal">
+            <Icon className="w-6 h-6" />
         </div>
-        <h3 className="text-xl font-display font-bold mb-3 text-white">{title}</h3>
-        <p className="text-gray-400 leading-relaxed text-sm">
+
+        <h3 className="text-xl font-display font-bold mb-3 text-brand-navy group-hover:text-brand-teal transition-colors">{title}</h3>
+        <p className="text-text-body leading-relaxed text-sm">
             {description}
         </p>
     </motion.div>
@@ -50,7 +53,7 @@ const Features = () => {
     ];
 
     return (
-        <section id="features" className="py-24 px-6 md:px-12 relative z-10 bg-vanta-black">
+        <section id="features" className="py-24 px-6 md:px-12 relative z-10 bg-white">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     className="text-center mb-16"
@@ -58,15 +61,19 @@ const Features = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-                        Why <span className="text-neon-pink">Us?</span>
+                    <div className="inline-block px-4 py-1.5 mb-4 rounded-full bg-brand-teal/10 text-brand-teal text-sm font-semibold tracking-wide border border-brand-teal/20">
+                        FEATURES
+                    </div>
+                    <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 text-brand-navy">
+                        Why Leading Companies <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-blue-600">Choose DinkarSoft?</span>
                     </h2>
-                    <p className="text-gray-400 max-w-2xl mx-auto">
-                        Addressing your pain points with precision, privacy, and control.
+                    <p className="text-text-body max-w-2xl mx-auto text-lg">
+                        Addressing your technical pain points with precision, privacy, and absolute control.
                     </p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {features.map((feature, index) => (
                         <FeatureCard
                             key={index}
