@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, MapPin, Linkedin, Twitter, Github } from 'lucide-react';
+import { Mail, Linkedin, Twitter, Github } from 'lucide-react';
 
 const Footer = () => {
     return (
@@ -37,18 +37,27 @@ const Footer = () => {
                     <div>
                         <h4 className="text-white font-bold mb-6">Global Presence</h4>
                         <div className="space-y-4 text-sm text-slate-400">
-                            <div className="flex gap-3 items-start">
-                                <MapPin className="text-brand-teal mt-1 shrink-0" size={16} />
-                                <div>
-                                    <strong className="text-white block mb-1">USA Branch</strong>
-                                    123 Tech Avenue, Silicon Valley,<br />CA 94000
+                            <div className="mb-4">
+                                <strong className="text-white block mb-2 text-sm font-bold tracking-wide uppercase">India Branch</strong>
+                                <div className="flex gap-3 items-start">
+                                    <span className="text-slate-500 font-mono text-xs mt-1 shrink-0">IN</span>
+                                    <div className="leading-relaxed">
+                                        110-3 Satya Bhawan<br />
+                                        Wazirpur Industrial Area<br />
+                                        Delhi, India
+                                    </div>
                                 </div>
                             </div>
-                            <div className="flex gap-3 items-start">
-                                <MapPin className="text-brand-teal mt-1 shrink-0" size={16} />
-                                <div>
-                                    <strong className="text-white block mb-1">India Branch</strong>
-                                    Tech Park, Bangalore,<br />Karnataka 560000
+
+                            <div>
+                                <strong className="text-white block mb-2 text-sm font-bold tracking-wide uppercase">USA Branch</strong>
+                                <div className="flex gap-3 items-start">
+                                    <span className="text-slate-500 font-mono text-xs mt-1 shrink-0">US</span>
+                                    <div className="leading-relaxed">
+                                        3477 Mckee Rd #1092<br />
+                                        San Jose, CA, 95127<br />
+                                        USA
+                                    </div>
                                 </div>
                             </div>
                             <div className="flex gap-3 items-center mt-6">
