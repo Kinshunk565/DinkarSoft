@@ -3,22 +3,28 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Loader, CheckCircle, Bot, Send, Globe, Brain, Zap } from 'lucide-react';
 
 const DemoModal = ({ isOpen, onClose, url }) => {
-    const [step, setStep] = useState('processing'); // processing, ready
+    const [step, setStep] = useState('form'); // form, processing, ready
+    const [formData, setFormData] = useState({ name: '', email: '', company: '' });
     const [progress, setProgress] = useState(0);
     const [logs, setLogs] = useState([]);
     const [messages, setMessages] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const messagesEndRef = useRef(null);
 
-    // Mock Processing Logic
+    // Reset when closed
     useEffect(() => {
         if (!isOpen) {
-            setStep('processing');
+            setStep('form');
             setProgress(0);
             setLogs([]);
             setMessages([]);
-            return;
+            setFormData({ name: '', email: '', company: '' });
         }
+    }, [isOpen]);
+
+    // Processing Logic
+    useEffect(() => {
+        if (step !== 'processing') return;
 
         const processSteps = [
             { time: 500, msg: `Connecting to ${url}...`, progress: 10 },
@@ -50,7 +56,12 @@ const DemoModal = ({ isOpen, onClose, url }) => {
         });
 
         return () => timeouts.forEach(clearTimeout);
-    }, [isOpen, url]);
+    }, [step, url]);
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        setStep('processing');
+    };
 
     const handleSendMessage = (e) => {
         e.preventDefault();
@@ -101,7 +112,57 @@ const DemoModal = ({ isOpen, onClose, url }) => {
                             <X size={20} />
                         </button>
 
-                        {step === 'processing' ? (
+                        {step === 'form' ? (
+                            <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-slate-50/50">
+                                <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                                    <h3 className="text-2xl font-display font-bold text-brand-navy mb-2 text-center">Setup Your Demo Bot</h3>
+                                    <p className="text-slate-500 mb-8 text-center text-sm">We'll train a custom AI agent on {url || 'your website'} in seconds.</p>
+
+                                    <form onSubmit={handleFormSubmit} className="space-y-4">
+                                        <div>
+                                            <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">Full Name</label>
+                                            <input
+                                                type="text"
+                                                required
+                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 outline-none focus:border-brand-teal transition-colors text-sm"
+                                                placeholder="John Doe"
+                                                value={formData.name}
+                                                onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">Work Email</label>
+                                            <input
+                                                type="email"
+                                                required
+                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 outline-none focus:border-brand-teal transition-colors text-sm"
+                                                placeholder="john@company.com"
+                                                value={formData.email}
+                                                onChange={e => setFormData({ ...formData, email: e.target.value })}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-2">Company Name</label>
+                                            <input
+                                                type="text"
+                                                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 outline-none focus:border-brand-teal transition-colors text-sm"
+                                                placeholder="Acme Inc."
+                                                value={formData.company}
+                                                onChange={e => setFormData({ ...formData, company: e.target.value })}
+                                            />
+                                        </div>
+
+                                        <button
+                                            type="submit"
+                                            className="w-full bg-brand-navy text-white font-bold py-4 rounded-xl mt-4 hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
+                                        >
+                                            <Bot size={20} />
+                                            Generate Demo Bot
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        ) : step === 'processing' ? (
                             <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center">
                                 <div className="w-24 h-24 mb-8 relative">
                                     <div className="absolute inset-0 border-4 border-slate-100 rounded-full"></div>
