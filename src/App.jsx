@@ -3,7 +3,9 @@ import CustomCursor from './components/layout/CustomCursor';
 import Navbar from './components/layout/Navbar';
 import PopupManager from './components/layout/PopupManager';
 import Hero from './components/sections/Hero';
+import HowItWorks from './components/sections/HowItWorks';
 import Features from './components/sections/Features';
+import ComparisonTable from './components/sections/ComparisonTable';
 import Footer from './components/layout/Footer';
 
 function App() {
@@ -14,7 +16,9 @@ function App() {
       <PopupManager />
       <main>
         <Hero />
+        <HowItWorks />
         <Features />
+        <ComparisonTable />
       </main>
       <Footer />
     </div>
